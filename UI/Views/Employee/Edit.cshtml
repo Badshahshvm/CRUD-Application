@@ -1,0 +1,88 @@
+@model WebApplication1.Models.Employee
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+@{
+    ViewData["Title"] = "Edit Employee";
+    var cities = new List<string> { "Delhi", "Mumbai", "Patna", "Bangalore", "Ahmedabad", "Kolkata", "Hyderabad" };
+}
+
+<h2  class="text-center text-primary mb-4">Edit Employee</h2>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+
+        <form asp-action="Edit" method="post" enctype="multipart/form-data" class="shadow p-4 bg-white rounded">
+    <input type="hidden" asp-for="Id" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Code"></label>
+        <input asp-for="Code" class="form-control" />
+        <span asp-validation-for="Code" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="DOB"></label>
+        <input asp-for="DOB" type="date" class="form-control" />
+        <span asp-validation-for="DOB" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="City"></label>
+        <select asp-for="City" class="form-select">
+            @foreach (var city in cities)
+            {
+                <option value="@city" selected="@(Model.City == city ? "selected" : null)">@city</option>
+            }
+        </select>
+        <span asp-validation-for="City" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Gender</label><br />
+        <input type="radio" asp-for="Gender" value="Male" checked="@Model.Gender == "Male"" /> Male
+        <input type="radio" asp-for="Gender" value="Female" class="ms-3" checked="@Model.Gender == "Female"" /> Female
+        <span asp-validation-for="Gender" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Status</label><br />
+        <input type="radio" asp-for="Status" value="Active" checked="@Model.Status == "Active"" /> Active
+        <input type="radio" asp-for="Status" value="Inactive" class="ms-3" checked="@Model.Status == "Inactive"" /> Inactive
+        <span asp-validation-for="Status" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label>Upload New Photo</label>
+        <input type="file" name="PhotoFile" class="form-control" />
+    </div>
+
+    @* @if (!string.IsNullOrEmpty(Model.PhotoFileName))
+    {
+        <div class="mb-3">
+            <label>Current Photo:</label><br />
+            <img src="@Model.PhotoFileName" alt="Employee Photo" class="rounded border" style="max-height: 150px;" />
+        </div>
+    } *@
+
+    <div class="d-grid">
+        <input type="submit" value="Update" class="btn btn-primary" />
+    </div>
+</form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
