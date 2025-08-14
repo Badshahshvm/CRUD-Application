@@ -1,0 +1,111 @@
+@model WebApplication1.Models.Employee
+
+@{
+    ViewData["Title"] = "Create Employee";
+    var cities = new List<string>
+    { 
+        "Delhi", "Mumbai", "Patna", "Bangalore", "Ahmedabad", "Kolkata", "Hyderabad" 
+    };
+}
+
+<h2 class="text-center text-primary mb-4">Add New Employee</h2>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <form asp-action="Create" method="post" enctype="multipart/form-data" class="shadow p-4 bg-white rounded">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Code" class="form-label"></label>
+                <input asp-for="Code" class="form-control" />
+                <span asp-validation-for="Code" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="DOB" class="form-label"></label>
+                <input asp-for="DOB" type="date" class="form-control" />
+                <span asp-validation-for="DOB" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="City" class="form-label"></label>
+                <select asp-for="City" class="form-select">
+                    <option value="">-- Select City --</option>
+                    @foreach (var city in cities)
+                    {
+                        <option value="@city">@city</option>
+                    }
+                </select>
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Gender</label><br />
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" asp-for="Gender" value="Male" />
+                    <label class="form-check-label">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" asp-for="Gender" value="Female" />
+                    <label class="form-check-label">Female</label>
+                </div>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Status</label><br />
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" asp-for="Status" value="Active" />
+                    <label class="form-check-label">Active</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" asp-for="Status" value="Inactive" />
+                    <label class="form-check-label">Inactive</label>
+                </div>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label>Photo</label>
+                <input type="file" name="PhotoFile" class="form-control" accept="image/*" onchange="previewImage(event)" />
+            </div>
+
+            <!-- Image Preview -->
+            <div class="mb-3 text-center">
+                <img id="photoPreview" src="#" alt="Image Preview" class="img-thumbnail" style="max-width: 200px; display: none;" />
+            </div>
+
+            <div class="d-grid">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+
+        <div class="mt-3 text-center">
+            <a asp-action="Index" class="btn btn-link">Back to List</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                var output = document.getElementById('photoPreview');
+                output.src = reader.result;
+                output.style.display = 'block';
+            };
+            if (event.target.files.length > 0) {
+                reader.readAsDataURL(event.target.files[0]);
+            }
+        }
+    </script>
+}
