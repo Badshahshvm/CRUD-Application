@@ -1,0 +1,68 @@
+@{
+    ViewData["Title"] = "Employee Management";
+}
+
+<div class="container mt-5">
+    <div class="text-center mb-5">
+        <h1 class="fw-bold text-primary">👨‍💼 Employee Management</h1>
+        <p class="text-muted">Manage, track & organize your workforce in one place.</p>
+        <hr class="w-25 mx-auto">
+    </div>
+
+    <div class="row g-4">
+        <!-- Add Employee -->
+        <div class="col-md-4">
+            <div class="card shadow border-0 h-100 hover-shadow">
+                <div class="card-body text-center">
+                    <i class="bi bi-person-plus display-4 text-success mb-3"></i>
+                    <h5>Add Employee</h5>
+                    <p class="small text-muted">Quickly register new staff with all details.</p>
+                    <a href="@Url.Action("Create", "Employee")" class="btn btn-success btn-sm">Add</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- View Employees -->
+        <div class="col-md-4">
+            <div class="card shadow border-0 h-100 hover-shadow">
+                <div class="card-body text-center">
+                    <i class="bi bi-people display-4 text-primary mb-3"></i>
+                    <h5>View Employees</h5>
+                    <p class="small text-muted">Search & browse staff records instantly.</p>
+                    <a href="@Url.Action("Index", "Employee")" class="btn btn-primary btn-sm">View</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reports -->
+        <div class="col-md-4">
+            <div class="card shadow border-0 h-100 hover-shadow">
+                <div class="card-body text-center">
+                    <i class="bi bi-bar-chart display-4 text-warning mb-3"></i>
+                    <h5>Reports</h5>
+                    <p class="small text-muted">Analyze and generate quick insights.</p>
+                    <a href="#" class="btn btn-warning btn-sm">Reports</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About -->
+    <div class="mt-5 text-center">
+        <h4 class="fw-bold text-secondary">Why Use This?</h4>
+        <p class="text-muted small w-75 mx-auto">
+            A simple yet powerful tool to keep your team data organized. Add, edit & track employees effortlessly.
+        </p>
+    </div>
+</div>
+
+<!-- Bootstrap Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+<style>
+    .hover-shadow:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        transition: all 0.3s ease-in-out;
+    }
+</style>
