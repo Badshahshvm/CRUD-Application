@@ -1,0 +1,6 @@
+@CRUD_Web_Api_Application_HostAddress = http://localhost:5227
+
+GET {{CRUD_Web_Api_Application_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
